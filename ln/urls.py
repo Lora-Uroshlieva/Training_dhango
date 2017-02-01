@@ -20,5 +20,7 @@ from ln import views
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
-    url(r'^$', views.dashboard),
+    url(r'^$', views.dashboard, name='dashboard'),
+    url(r'^movie/order/(?P<movie_id>\d+)$', views.movie_order,
+        name='movie_order'),
 ]

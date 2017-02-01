@@ -1,10 +1,16 @@
 from django.http import HttpResponse, HttpResponseNotFound
+from django.shortcuts import render, redirect
+from django.contrib import messages
 
 from ln import  models
 
 
 def dashboard(request):
-    r = models.Movie.objects.all()
+    movies = models.Movie.objects.all()
 
-    return HttpResponse(r)
-    #return HttpResponseNotFound('Hello')
+    return render(request, 'dashboard.html', {'movies': movies})
+
+def movie_order(request, movie_id):
+    print(movie_id)
+    messages.info(request, messages.INFO, 'Go to %s' % movie_id)
+    return redirect('dashboard')
