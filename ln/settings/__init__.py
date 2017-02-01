@@ -12,10 +12,10 @@ https://docs.djangoproject.com/en/1.10/ref/settings/
 
 import os
 
-import ln.settings.main
+from ln.settings.main import *
 
-if str(os.environ.get('IS_LOCAL')):
-    import ln.settings.local
+if str(os.environ.get('IS_LOCAL', 1)):
+    from ln.settings.local import *
 else:
-    import ln.settings.prod
+    from ln.settings.prod import *
 
