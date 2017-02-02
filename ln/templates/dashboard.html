@@ -4,33 +4,45 @@
     <meta charset="UTF-8">
     <title>Title</title>
     <!-- Latest compiled and minified CSS -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
-    </head>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+</head>
 <body>
     <div class="container">
-    <div class="">
-    <table class="table table-condensed">
-        <tr>
-            <th>Id</th>
-            <th>Name</th>
-            <th>Date show</th>
-            <th> </th>
-        </tr>
-        <tr>
-            {% for movie in movies %}
-                <td>{{ movie.id}}</td>
-                <td>{{ movie.name}}</td>
-                <td>{{ movie.date_show}}</td>
-                <td>
-                    <form action="{% url 'movie_order' movie_id=movie.id %}"
-                          method="POST">
-                        {% csrf_token %}
-                        <button type="submit">Go</button>
-                    </form>
-                </td>
-        </tr>
-        {% endfor %}
-    </table>
+        <div class="row">
+            {% if messages %}
+                <ul class="messages">
+                    {% for message in messages %}
+                        <div class="alert alert-info" role="alert">
+                            {{ message}}</div>
+{#                        <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>#}
+                    {% endfor %}
+                </ul>
+            {% endif %}
+
+
+            <table class="table table-bordered">
+                <tr>
+                    <th>Id</th>
+                    <th>Name</th>
+                    <th>Date</th>
+                    <th></th>
+                </tr>
+                {% for movie in movies %}
+                <tr>
+                    <td>{{ movie.id }}</td>
+                    <td>{{ movie.name }}</td>
+                    <td>{{ movie.date_show }}</td>
+                    <td>
+                        <form action="{% url 'movie_order' movie_id=movie.id%}"
+                              method="post">
+                            {% csrf_token %}
+                            <button type="submit">Go</button>
+                        </form>
+                    </td>
+                </tr>
+                {% endfor %}
+            </table>
+        </div>
     </div>
 </body>
 </html>

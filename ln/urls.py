@@ -15,11 +15,13 @@ Including another URLconf
 """
 from django.conf.urls import url
 from django.contrib import admin
+from django.contrib.auth import views as auth_views
 
 from ln import views
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
+    url(r'^accounts/login/$', auth_views.login),
     url(r'^$', views.dashboard, name='dashboard'),
     url(r'^movie/order/(?P<movie_id>\d+)$', views.movie_order,
         name='movie_order'),
