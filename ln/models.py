@@ -1,5 +1,32 @@
 from django.db import models
 from django.contrib import admin
+from django.contrib.auth.models import AbstractBaseUser
+
+
+class User(AbstractBaseUser):
+    name = models.CharField(max_length=50)
+    password = models.CharField(max_length=32)
+    email = models.CharField(max_length=50)
+    phone =
+    date_registry = models.DateField(auto_now=True)
+
+    def get_short_name(self):
+        pass
+
+    def get_full_name(self)
+        pass
+
+    class Meta:
+        db_table = 'user'
+
+
+class Phone(models.Model):
+    user = models.ForeignKey(User)
+    value = models.CharField(max_length=11)
+    status = models.IntegerField()
+
+    class Meta:
+        db_table = 'phone'
 
 
 class Category(models.Model):
