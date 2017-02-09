@@ -4,16 +4,22 @@ from django.contrib.auth.models import AbstractBaseUser
 
 
 class User(AbstractBaseUser):
-    name = models.CharField(max_length=50)
+    login = models.CharField(max_length=50, unique=True)
+    status = models.CharField(max_length=15, choices=(
+        ('removed', 'Removed'),
+        ('no_active', 'No active'),
+        ('active', 'Active')))
     password = models.CharField(max_length=32)
     email = models.CharField(max_length=50)
-    phone =
     date_registry = models.DateField(auto_now=True)
+
+    REQUIRED_FIELDS = ()
+    USERNAME_FIELD = 'login'
 
     def get_short_name(self):
         pass
 
-    def get_full_name(self)
+    def get_full_name(self):
         pass
 
     class Meta:
@@ -23,7 +29,9 @@ class User(AbstractBaseUser):
 class Phone(models.Model):
     user = models.ForeignKey(User)
     value = models.CharField(max_length=11)
-    status = models.IntegerField()
+    status = models.CharField(max_length=15, choices=(
+        ('no_active', 'No active'),
+        ('active', 'Active')))
 
     class Meta:
         db_table = 'phone'

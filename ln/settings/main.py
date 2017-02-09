@@ -27,6 +27,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'ln',
+    'ln.user.apps.User'
 ]
 
 MIDDLEWARE = [
@@ -44,7 +45,9 @@ ROOT_URLCONF = 'ln.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [os.path.join(BASE_DIR, 'templates')],
+        'DIRS': [
+            os.path.join(BASE_DIR, 'templates'),
+            [os.path.join(BASE_DIR, 'user', 'templates')]],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
