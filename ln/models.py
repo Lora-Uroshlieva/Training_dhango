@@ -2,16 +2,20 @@ from django.db import models
 from django.contrib import admin
 from django.contrib.auth.models import AbstractBaseUser
 
+from ln.managers import UserManager
+
 
 class User(AbstractBaseUser):
     login = models.CharField(max_length=50, unique=True)
     status = models.CharField(max_length=15, choices=(
         ('removed', 'Removed'),
         ('no_active', 'No active'),
-        ('active', 'Active')))
+        ('active', 'Active')), default='no_active')
     password = models.CharField(max_length=32)
     email = models.CharField(max_length=50)
     date_registry = models.DateField(auto_now=True)
+
+    objects = UserManager()
 
     REQUIRED_FIELDS = ()
     USERNAME_FIELD = 'login'

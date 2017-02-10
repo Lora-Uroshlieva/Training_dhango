@@ -10,7 +10,11 @@
 
     <div class="form-group">
         <label for="login">Login</label>
-        <input class="form-control" name="login" id="login" placeholder="Login" value={{ form.login.value }}>
+        <input class="form-control"
+               name="login"
+               id="login"
+               placeholder="Login"
+               value={{ form.login.value }}>
     </div>
     <div class="form-group">
         <label for="password">Password</label>
@@ -19,6 +23,8 @@
                name="password"
                id="password"
                placeholder="Password"
+                value={{ form.password.value }}
+        >
     </div>
 
     <button type="submit" class="btn btn-default">Submit</button>
