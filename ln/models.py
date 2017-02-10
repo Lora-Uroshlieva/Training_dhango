@@ -1,3 +1,5 @@
+from datetime import datetime, timedelta
+
 from django.db import models
 from django.contrib import admin
 from django.contrib.auth.models import AbstractBaseUser
@@ -11,7 +13,7 @@ class User(AbstractBaseUser):
         ('removed', 'Removed'),
         ('no_active', 'No active'),
         ('active', 'Active')), default='no_active')
-    password = models.CharField(max_length=32)
+    password = models.CharField(max_length=49)
     email = models.CharField(max_length=50)
     date_registry = models.DateField(auto_now=True)
 
@@ -28,6 +30,15 @@ class User(AbstractBaseUser):
 
     class Meta:
         db_table = 'user'
+
+
+class Session(models.Model):
+    user = models.ForeignKey(User)
+    token = models.CharField(max_length=36)
+    date_expired = models.DateTimeField(default=datetime.now() + timedelta(days=7))
+
+    class Meta:
+        db_table = 'session'
 
 
 class Phone(models.Model):
